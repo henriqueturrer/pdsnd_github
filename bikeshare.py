@@ -12,12 +12,12 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
-city_dic = {1:'chicago', 
-            2:'new york city', 
+city_dic = {1:'chicago',
+            2:'new york city',
             3:'washington'}
 
-month_dic = {1:'January', 
-             2:'February', 
+month_dic = {1:'January',
+             2:'February',
              3:'March',
              4:'April',
              5:'May',
@@ -31,14 +31,13 @@ month_dic = {1:'January',
              13:'All'}
 
 day_dic = {1:'Monday',
-           2:'Tuesday', 
+           2:'Tuesday',
            3:'Wednesday',
            4:'Thursday',
            5:'Friday',
            6:'Saturday',
            7:'Sunday',
            8:'All'}
-
 
 def get_filters():
     """
@@ -51,7 +50,7 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
- 
+
     while True:
         try:
             city_no = input("Please choose a city typing the related number:(1: Chicago, 2: New York City, 3: Washington)\n ")
@@ -62,7 +61,7 @@ def get_filters():
             break
         except ValueError:
             print("No valid integer! Please try again ...")
-    
+
     city = city_dic[city_no]
     print('The choosen city was {}'.format(city))
 
@@ -101,7 +100,6 @@ def get_filters():
     print('-'*40)
     return city, month, day
 
-
 def load_data(city, month, day):
     """
     Loads data for the specified city and filters by month and day if applicable.
@@ -137,7 +135,7 @@ def load_data(city, month, day):
 
     if month != 0:
         df = df[df['month'] == month]
-    
+
     if day != 7:
         df = df[df['day_of_week'] == day]
 
@@ -150,20 +148,19 @@ def time_stats(df):
     start_time = time.time()
 
     # TO DO: display the most common month
-    
+
     popular_month = df['month'].value_counts().idxmax()
     month_count = df['month'].value_counts()[popular_month]
     month = month_dic[popular_month]
 
     print('The most common month was "{}" with "{}" records.\n'.format(month, month_count))
- 
+
     # TO DO: display the most common day of week
 
     popular_day = df['day_of_week'].value_counts().idxmax()
     day_count = df['day_of_week'].value_counts()[popular_day]
-    day = day_dic[popular_day] 
+    day = day_dic[popular_day]
     print('The most common day of week was "{}" with "{}" records.\n'.format(day, day_count))
-    
 
     # TO DO: display the most common start hour
 
@@ -172,11 +169,9 @@ def time_stats(df):
     hour_count = df['hour'].value_counts()[popular_hour]
 
     print('The most common hour was "{}h" whith "{}" records.\n'.format(popular_hour, hour_count))
-    
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-
 
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
@@ -189,25 +184,21 @@ def station_stats(df):
     pop_start_statiom = df['Start Station'].value_counts().idxmax()
     start_station_count = df['Start Station'].value_counts()[pop_start_statiom]
     print('The most common commonly used start station was "{}" with "{}" records\n'.format(pop_start_statiom, start_station_count))
-    
 
     # TO DO: display most commonly used end station
 
     pop_end_statiom = df['End Station'].value_counts().idxmax()
     end_station_count = df['End Station'].value_counts()[pop_end_statiom]
     print('The most common commonly used end station was "{}" with "{}" records\n'.format(pop_end_statiom,end_station_count))
-    
 
     # TO DO: display most frequent combination of start station and end station trip
 
     pop_start_end = df[['Start Station','End Station']].value_counts().idxmax()
     start_end_count = df[['Start Station','End Station']].value_counts()[pop_start_end]
     print('The most frequent combination of start station and end station trip was "{}" with "{}" records\n'.format(pop_start_end,start_end_count))
-  
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-
 
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
@@ -228,7 +219,6 @@ def trip_duration_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
 def user_stats(df):
     """Displays statistics on bikeshare users."""
 
@@ -248,10 +238,8 @@ def user_stats(df):
 
     print('The earlist trip was: "{}".\nThe most recent trip was: "{}".\nThe most common year of birth is: "{}".\n'.format(earliest,most_recent,year_birth))
 
-
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-
 
 def main():
     while True:
@@ -266,7 +254,6 @@ def main():
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
-
 
 if __name__ == "__main__":
 	main()
